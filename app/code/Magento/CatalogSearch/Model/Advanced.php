@@ -416,7 +416,7 @@ class Advanced extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Returns prepared search criterias in text
+     * Returns prepared search criteria in text
      *
      * @return array
      */
