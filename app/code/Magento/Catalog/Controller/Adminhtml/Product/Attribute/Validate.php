@@ -232,7 +232,7 @@ class Validate extends AttributeAction implements HttpGetActionInterface, HttpPo
     }
 
     /**
-     * Check that admin does not try to create option with empty admin scope option.
+     * Check that admin does not try to create option with empty option.
      *
      * @param DataObject $response
      * @param array $optionsForCheck
@@ -241,8 +241,11 @@ class Validate extends AttributeAction implements HttpGetActionInterface, HttpPo
     private function checkEmptyOption(DataObject $response, array $optionsForCheck = null)
     {
         foreach ($optionsForCheck as $optionValues) {
-            if (isset($optionValues[0]) && $optionValues[0] == '') {
+            if (isset($optionValues[0]) && trim($optionValues[0]) == '') {
                 $this->setMessageToResponse($response, [__("The value of Admin scope can't be empty.")]);
+                $response->setError(true);
+            } elseif (isset($optionValues[1]) && trim($optionValues[1]) == '') {
+                $this->setMessageToResponse($response, [__("The value of Default Store View scope can't be empty.")]);
                 $response->setError(true);
             }
         }
